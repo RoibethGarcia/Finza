@@ -1,0 +1,38 @@
+services:
+  postgres:
+    image: postgres:17-alpine
+    container_name: gestor-gastos-postgres
+    environment:
+      POSTGRES_DB: gestor_gastos
+      POSTGRES_USER: gestor_gastos
+      POSTGRES_PASSWORD: gestor_gastos
+    ports:
+      - "5432:5432"
+    volumes:
+      - gestor-gastos-postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U gestor_gastos -d gestor_gastos"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: ./demo
+      dockerfile: Dockerfile
+    container_name: gestor-gastos-backend
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      SPRING_PROFILES_ACTIVE: local
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/gestor_gastos
+      SPRING_DATASOURCE_USERNAME: gestor_gastos
+      SPRING_DATASOURCE_PASSWORD: gestor_gastos
+      APP_JWT_SECRET: compose-local-secret-at-least-32-characters
+      APP_DEFAULT_TIMEZONE: UTC
+    ports:
+      - "8080:8080"
+
+volumes:
+  gestor-gastos-postgres-data:

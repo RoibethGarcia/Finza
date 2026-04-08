@@ -1,0 +1,84 @@
+spring:
+  application:
+    name: gestor-gastos-api
+  profiles:
+    default: local
+  mvc:
+    problemdetails:
+      enabled: true
+    throw-exception-if-no-handler-found: true
+  web:
+    resources:
+      add-mappings: false
+  jackson:
+    time-zone: ${APP_DEFAULT_TIMEZONE:UTC}
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        jdbc:
+          time_zone: UTC
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+
+server:
+  servlet:
+    context-path: /
+  error:
+    include-message: never
+    include-binding-errors: never
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      probes:
+        enabled: true
+      show-details: never
+  health:
+    livenessstate:
+      enabled: true
+    readinessstate:
+      enabled: true
+
+logging:
+  pattern:
+    level: "%5p [%X{traceId:-N/A}]"
+
+app:
+  security:
+    jwt:
+      issuer: gestor-gastos-api
+      audience: gestor-gastos-clients
+      access-token-ttl: PT15M
+      refresh-token-ttl: P14D
+      secret: ${APP_JWT_SECRET:change-me-local-secret-at-least-32-chars}
+    password:
+      bcrypt-strength: 12
+  cors:
+    allowed-origins: []
+    allowed-methods:
+      - GET
+      - POST
+      - PUT
+      - PATCH
+      - DELETE
+      - OPTIONS
+    allowed-headers:
+      - Authorization
+      - Content-Type
+      - X-Trace-Id
+    exposed-headers:
+      - X-Trace-Id
+    allow-credentials: true
+    max-age: PT1H
+  time:
+    zone-id: ${APP_DEFAULT_TIMEZONE:UTC}
+  observability:
+    trace-header-name: X-Trace-Id

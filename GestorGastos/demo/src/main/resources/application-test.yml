@@ -1,0 +1,22 @@
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+
+logging:
+  level:
+    root: WARN
+    com.gestorgastos: INFO
+
+app:
+  security:
+    jwt:
+      issuer: gestor-gastos-api-test
+      audience: gestor-gastos-test-clients
+      access-token-ttl: PT5M
+      refresh-token-ttl: P7D
+      secret: test-secret-at-least-32-characters-long
+    password:
+      bcrypt-strength: 4
+  cors:
+    allowed-origins:
+      - http://localhost:4173
