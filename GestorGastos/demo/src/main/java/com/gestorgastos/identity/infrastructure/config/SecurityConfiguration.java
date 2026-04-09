@@ -44,6 +44,12 @@ public class SecurityConfiguration {
 				.requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
 				.requestMatchers("/error").permitAll()
 				.requestMatchers("/actuator/health", "/actuator/health/**").permitAll()
+				.requestMatchers(HttpMethod.POST,
+					"/api/v1/auth/register",
+					"/api/v1/auth/login",
+					"/api/v1/auth/refresh",
+					"/api/v1/auth/logout"
+				).permitAll()
 				.anyRequest().authenticated()
 			)
 			.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
