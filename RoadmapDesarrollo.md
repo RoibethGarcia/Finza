@@ -1,4 +1,29 @@
-. Resumen ejecutivo
+# Roadmap de Desarrollo
+
+## Estado verificado al 2026-04-15
+
+Este roadmap fue contrastado contra el código real del repositorio.
+
+### Estado actual
+
+- **Fase 0: COMPLETADA**
+- **Fase 1: COMPLETADA**
+- **Fase 2+: pendientes**
+
+### Evidencia ya implementada en el repositorio
+
+- backend Spring Boot 4 + Java 21 sobre `com.gestorgastos`
+- perfiles de configuración
+- Flyway
+- seguridad con JWT + refresh token persistido
+- manejo global de errores
+- observabilidad base con Actuator y trace id
+- módulos `identity`, `ledger`, `shared` y ahora `reporting`
+- cuentas, categorías, movimientos, transferencias, balance por período y dashboard básico
+- frontend SPA base en React + TypeScript + Vite con features de auth, dashboard, cuentas, categorías y movimientos
+- Docker Compose con PostgreSQL, backend y frontend
+
+## Resumen ejecutivo
 La recomendación correcta para este proyecto es un monolito modular con API REST, construido sobre el backend actual en Java 21 + Spring Boot + PostgreSQL, con React SPA en frontend y Docker Compose para desarrollo/local.
 
 La clave NO es meter tecnología; la clave es modelar BIEN el dominio desde el inicio.
@@ -21,7 +46,7 @@ Mobile en una fase posterior, cuando el API y el modelo ya estén estabilizados.
 Eso te da una base SIMPLE, mantenible y con crecimiento controlado.
 
 2. Arquitectura recomendada alineada al repositorio actual
-Hoy el repositorio tiene solo un arranque técnico. Eso es BUENO: todavía estás a tiempo de hacer bien las fundaciones.
+Hoy el repositorio YA no está en estado de scaffold puro. La base técnica y el MVP financiero inicial ya existen; a partir de aquí el foco correcto es proteger la calidad del núcleo y avanzar sobre obligaciones, ahorro y analítica sin romper `ledger`.
 
 Evolución recomendada desde el scaffold actual
 Fase 0: convertir el scaffold en una base de producto
@@ -657,6 +682,7 @@ Mitigación: introducir Flyway en fase 0.
 12. Roadmap por fases
 Fase 0: fundaciones técnicas
 Objetivo: convertir el scaffold en una base mantenible de producto.
+Estado: COMPLETADA.
 Funcionalidades incluidas:
 estructura modular inicial;
 perfiles de configuración;
@@ -690,6 +716,7 @@ migraciones operativas;
 convenciones fijadas.
 Fase 1: MVP financiero base
 Objetivo: entregar la primera versión útil para finanzas personales básicas.
+Estado: COMPLETADA.
 Funcionalidades incluidas:
 registro/login;
 perfil actual y bienvenida;
@@ -706,7 +733,7 @@ reporting
 frontend auth/dashboard/accounts/transactions/categories
 Decisiones técnicas relevantes:
 no persistir balances agregados;
-usar queries agregadas para dashboard;
+calcular balances y dashboard a partir del ledger persistido;
 separar transferencias de ingresos/gastos.
 Qué se posterga:
 préstamos;
@@ -720,6 +747,7 @@ Criterio de salida de la fase:
 un usuario puede usar la app diariamente para registrar y consultar su dinero.
 Fase 2: compromisos financieros
 Objetivo: incorporar obligaciones reales sin romper el núcleo.
+Estado: SIGUIENTE FASE.
 Funcionalidades incluidas:
 préstamos bancarios;
 préstamos vehiculares;
@@ -746,6 +774,7 @@ Criterio de salida de la fase:
 el usuario ve claramente cuánto debe, cuánto le deben y cuánto tiene realmente disponible.
 Fase 3: analítica y experiencia
 Objetivo: mejorar lectura financiera y usabilidad.
+Estado: PENDIENTE.
 Funcionalidades incluidas:
 dashboard avanzado;
 comparativas mensuales;
@@ -772,6 +801,7 @@ Criterio de salida de la fase:
 el producto ya no solo registra, también ayuda a decidir.
 Fase 4: escalado controlado
 Objetivo: endurecer operación y preparar expansión de clientes/canales.
+Estado: PENDIENTE.
 Funcionalidades incluidas:
 hardening de seguridad;
 auditoría mejorada;
@@ -897,21 +927,21 @@ Savings
 Reporting
 PostgreSQL
 15. Orden recomendado de implementación
-renombrar package base y limpiar scaffold;
-definir estructura modular backend;
-agregar Flyway;
-agregar perfiles/configuración;
-implementar manejo global de errores;
-implementar auth base;
-implementar usuario actual / bienvenida;
-implementar cuentas;
-implementar categorías;
-implementar movimientos;
-implementar transferencias;
-implementar balance y dashboard básico;
-montar frontend SPA base;
-conectar auth + cuentas + movimientos;
-agregar reporting básico;
+✅ renombrar package base y limpiar scaffold;
+✅ definir estructura modular backend;
+✅ agregar Flyway;
+✅ agregar perfiles/configuración;
+✅ implementar manejo global de errores;
+✅ implementar auth base;
+✅ implementar usuario actual / bienvenida;
+✅ implementar cuentas;
+✅ implementar categorías;
+✅ implementar movimientos;
+✅ implementar transferencias;
+✅ implementar balance y dashboard básico;
+✅ montar frontend SPA base;
+✅ conectar auth + cuentas + movimientos;
+✅ agregar reporting básico;
 agregar préstamos;
 agregar tarjetas;
 agregar deudas y cuentas por cobrar;

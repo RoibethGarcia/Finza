@@ -1,8 +1,10 @@
 # Backend module conventions
 
-## Active modules in phase 0
+## Active modules after phase 1
 - `shared`: cross-cutting configuration, error handling, web concerns and technical infrastructure.
 - `identity`: authentication foundations, user persistence and refresh token lifecycle.
+- `ledger`: accounts, categories, transactions and transfers.
+- `reporting`: dashboard and balance views derived from persisted ledger data.
 
 ## Layer rules
 - `api`: HTTP adapters only; never depend directly on `infrastructure`.

@@ -17,12 +17,22 @@ class LedgerFlywayMigrationTest extends AbstractPostgresIntegrationTest {
 	private JdbcTemplate jdbcTemplate;
 
 	@Test
-	void shouldCreateAccountsTable() {
+	void shouldCreateLedgerTables() {
 		Integer accountsTable = jdbcTemplate.queryForObject(
 			"select count(*) from information_schema.tables where table_name = 'accounts'",
 			Integer.class
 		);
+		Integer categoriesTable = jdbcTemplate.queryForObject(
+			"select count(*) from information_schema.tables where table_name = 'categories'",
+			Integer.class
+		);
+		Integer transactionsTable = jdbcTemplate.queryForObject(
+			"select count(*) from information_schema.tables where table_name = 'transactions'",
+			Integer.class
+		);
 
 		assertThat(accountsTable).isEqualTo(1);
+		assertThat(categoriesTable).isEqualTo(1);
+		assertThat(transactionsTable).isEqualTo(1);
 	}
 }
